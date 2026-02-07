@@ -5,6 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
     plugins: [react()],
     // For GitHub Pages: Set base to your repository name
-    // Change 'val' to your actual GitHub repository name
-    base: '/val/',
+    base: '/iamsorryminni/',
 })

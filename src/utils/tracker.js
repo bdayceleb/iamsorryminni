@@ -35,19 +35,17 @@ export const trackEvent = async (eventName, metadata = {}) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
 
     // Send to Google Sheets (non-blocking)
-    if (GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxRiaP4SgMQSXAPkXuKSn2sU1VmIpN49omhQklZupmCeA8GE73RcG_AHxTomrDtMe64cg/exec') {
-        try {
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Required for Google Apps Script
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(eventData)
-            });
-        } catch (error) {
-            console.log('Failed to send to Google Sheets:', error);
-        }
+    try {
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Required for Google Apps Script
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(eventData)
+        });
+    } catch (error) {
+        console.log('Failed to send to Google Sheets:', error);
     }
 
     console.log('📊 Tracked:', eventData);
